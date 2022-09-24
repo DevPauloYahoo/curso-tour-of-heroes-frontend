@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
+import { MessageService } from '../message/service/message.service';
 import { Hero } from './model/hero';
 import { HeroService } from './service/hero.service';
 
@@ -14,7 +15,7 @@ export class HeroesComponent {
   // heroes?: Hero[];
   selectedHero?: Hero;
 
-  constructor(private heroService: HeroService) {
+  constructor(private heroService: HeroService, private messageService: MessageService) {
     this.heroes$ = heroService.getHeroes().pipe(
       catchError(() => {
         console.log('Erro ao buscar heroes');
@@ -25,6 +26,7 @@ export class HeroesComponent {
   }
 
   onSelect(hero: Hero) {
+    this.messageService.add(`HeroesComponent: Selected hero ID: ${hero.id}`);
     this.selectedHero = hero;
   }
 }
