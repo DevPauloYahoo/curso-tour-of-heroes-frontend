@@ -11,10 +11,6 @@ import { HEROES } from './model/mock-hero';
 export class HeroesComponent {
   heroes: Hero[] = HEROES;
   selectedHero?: Hero;
-  hero: Hero = {
-    id: 1,
-    name: 'Wolverine',
-  };
 
   constructor() {}
 
