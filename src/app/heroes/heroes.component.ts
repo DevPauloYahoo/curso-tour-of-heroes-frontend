@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
 
-import { Hero } from './model/hero';
-import { HeroService } from './service/hero.service';
+import { Hero } from '../core/models/hero';
+import { HeroService } from '../core/services/hero.service';
 
 @Component({
   selector: 'app-heroes',

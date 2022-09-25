@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Hero } from '../heroes/model/hero';
-import { HeroService } from '../heroes/service/hero.service';
+import { Hero } from '../core/models/hero';
+import { HeroService } from '../core/services/hero.service';
 
 @Component({
   selector: 'app-hero-detail',

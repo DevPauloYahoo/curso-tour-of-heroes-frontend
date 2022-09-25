@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
-import { Hero } from '../heroes/model/hero';
-import { HeroService } from '../heroes/service/hero.service';
+import { Hero } from '../core/models/hero';
+import { HeroService } from '../core/services/hero.service';
 
 @Component({
   selector: 'app-dashboard',
