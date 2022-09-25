@@ -3,9 +3,9 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
+import { MaterialModule } from '../material/material.module';
 import { MessageComponent } from './components/message/message.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { MaterialModule } from './material/material.module';
 
 const COMPONENTS = [ToolbarComponent, MessageComponent];
 const MODULES = [CommonModule, MaterialModule, FlexLayoutModule, RouterModule];
