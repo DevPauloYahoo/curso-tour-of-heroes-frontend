@@ -1,11 +1,18 @@
 <div *ngIf="hero$ | async as hero">
   <h1>{{ hero.name | uppercase }} Details</h1>
-  <div><span>ID: </span>{{ hero.id }}</div>
-  <div><span>Name: </span>{{ hero.name }}</div>
-
-  <div>
-    <label for="name">Hero name:</label>
-    <input [(ngModel)]="hero.name" id="name" placeholder="name" type="text" />
-  </div>
-  <button (click)="goBack()" mat-raised-button>Go Back</button>
+  <mat-card>
+    <mat-card-content fxLayout="column">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input [value]="hero.id" disabled matInput />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Hero Name</mat-label>
+        <input [value]="hero.name" matInput placeholder="Hero Name" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="goBack()" mat-raised-button>Go Back</button>
+    </mat-card-actions>
+  </mat-card>
 </div>

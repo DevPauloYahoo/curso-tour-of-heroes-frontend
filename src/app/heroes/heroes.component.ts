@@ -11,8 +11,8 @@ import { HeroService } from './service/hero.service';
 })
 export class HeroesComponent {
   heroes$: Observable<Hero[]>;
-
   // heroes?: Hero[];
+  displayedColumns: string[] = ['id', 'name'];
 
   constructor(private heroService: HeroService) {
     this.heroes$ = heroService.getHeroes().pipe(
