@@ -1,6 +1,10 @@
 <h2>Dashboard</h2>
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between" fxLayoutGap="6">
-  <mat-card *ngFor="let hero of heroes$ | async">
+  <mat-card
+    *ngFor="let hero of heroes$ | async"
+    [routerLink]="['/heroes', hero.id]"
+    class="pointer"
+  >
     <mat-card-title>{{ hero.name }}</mat-card-title>
   </mat-card>
 </div>
