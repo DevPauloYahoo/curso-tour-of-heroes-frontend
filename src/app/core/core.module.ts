@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
@@ -8,7 +9,7 @@ import { MessageComponent } from './components/message/message.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 const COMPONENTS = [ToolbarComponent, MessageComponent];
-const MODULES = [CommonModule, MaterialModule, FlexLayoutModule, RouterModule];
+const MODULES = [CommonModule, MaterialModule, FlexLayoutModule, RouterModule, HttpClientModule];
 
 @NgModule({
   declarations: [COMPONENTS],
