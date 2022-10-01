@@ -15,7 +15,7 @@ export class HeroService {
   constructor(private http: HttpClient, private messageService: MessageService) {}
 
   // GET heroes
-  getHeroes(): Observable<Hero[]> {
+  getAll(): Observable<Hero[]> {
     return this.http
       .get<Hero[]>(`${this.baseUrl}/heroes`)
       .pipe(tap((heroes) => this.log(`HeroService: Fetched ${heroes.length} heroes`)));
@@ -23,7 +23,7 @@ export class HeroService {
   }
 
   // GET heroes/id
-  getHero(_id: number): Observable<Hero> {
+  getById(_id: number): Observable<Hero> {
     return this.http
       .get<Hero>(`${this.baseUrl}/heroes/${_id}`)
       .pipe(
@@ -33,6 +33,14 @@ export class HeroService {
     // const { id, name } = hero;
     // this.log(`HeroService: Fetched hero ID: ${id} and Name: ${name}`);
     // return of(hero);
+  }
+
+  update(hero: Hero): Observable<Hero> {
+    return this.http
+      .put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero)
+      .pipe(
+        tap((hero) => this.log(`HeroService: Updated hero ID: ${hero.id} and Name: ${hero.name}`)),
+      );
   }
 
   private log(message: string): void {

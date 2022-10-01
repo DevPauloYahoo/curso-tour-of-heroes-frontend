@@ -15,7 +15,7 @@ export class HeroesComponent {
   displayedColumns: string[] = ['id', 'name'];
 
   constructor(private heroService: HeroService) {
-    this.heroes$ = heroService.getHeroes().pipe(
+    this.heroes$ = heroService.getAll().pipe(
       catchError(() => {
         console.log('Erro ao buscar heroes');
         return of([]);

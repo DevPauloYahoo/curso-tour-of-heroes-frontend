@@ -14,7 +14,7 @@ export class DashboardComponent {
   heroes$: Observable<Hero[]>;
 
   constructor(private heroService: HeroService) {
-    this.heroes$ = this.heroService.getHeroes().pipe(map((heroes) => heroes.slice(1, 5)));
+    this.heroes$ = this.heroService.getAll().pipe(map((heroes) => heroes.slice(1, 5)));
     // this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes.slice(1, 4)));
     // this.getHeroes();
   }
