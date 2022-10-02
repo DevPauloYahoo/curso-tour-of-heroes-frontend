@@ -35,6 +35,14 @@ export class HeroService {
     // return of(hero);
   }
 
+  create(hero: Hero): Observable<Hero> {
+    return this.http
+      .post<Hero>(`${this.baseUrl}/heroes`, hero)
+      .pipe(
+        tap((hero) => this.log(`HeroService: Create hero ID: ${hero.id} and Name: ${hero.name}`)),
+      );
+  }
+
   update(hero: Hero): Observable<Hero> {
     return this.http
       .put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero)

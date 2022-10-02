@@ -10,7 +10,7 @@
     },
     {
       "id": 3,
-      "name": "Hulk Alterado"
+      "name": "Hulk"
     },
     {
       "id": 4,
@@ -23,6 +23,14 @@
     {
       "id": 6,
       "name": "Captain America"
+    },
+    {
+      "name": "Maria Fernanda",
+      "id": 7
+    },
+    {
+      "name": "Paulo Roberto",
+      "id": 8
     }
   ]
 }

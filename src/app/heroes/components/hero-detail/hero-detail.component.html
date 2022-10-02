@@ -1,19 +1,19 @@
-<div *ngIf="hero">
-  <h1>{{ hero.name | uppercase }} Details</h1>
-  <mat-card>
-    <mat-card-content fxLayout="column">
-      <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input [value]="hero.id" disabled matInput />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Hero Name</mat-label>
-        <input [(ngModel)]="hero.name" id="name" matInput placeholder="Hero Name" type="text" />
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="save()" color="primary" mat-raised-button>Save</button>
-      <button (click)="goBack()" mat-raised-button>Go Back</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+<h1>{{ isEditing ? 'Update' : 'Create' }} Hero</h1>
+<mat-card>
+  <mat-card-content fxLayout="column">
+    <mat-form-field *ngIf="isEditing">
+      <mat-label>ID</mat-label>
+      <input [value]="hero.id" disabled matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Hero Name</mat-label>
+      <input [(ngModel)]="hero.name" id="name" matInput placeholder="Hero Name" type="text" />
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="save()" color="primary" mat-raised-button>
+      {{ isEditing ? 'Update' : 'Create' }}
+    </button>
+    <button (click)="goBack()" mat-raised-button>Go Back</button>
+  </mat-card-actions>
+</mat-card>

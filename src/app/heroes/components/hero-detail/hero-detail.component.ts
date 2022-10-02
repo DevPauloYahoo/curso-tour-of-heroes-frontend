@@ -13,6 +13,7 @@ import { HeroService } from '../../services/hero.service';
 export class HeroDetailComponent {
   // hero$!: Observable<Hero>;
   hero!: Hero;
+  isEditing!: boolean;
 
   constructor(
     private heroService: HeroService,
@@ -23,8 +24,15 @@ export class HeroDetailComponent {
   }
 
   getHero(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getById(id).subscribe((hero) => (this.hero = hero));
+    const paramId = this.route.snapshot.params['id'];
+    this.hero = { name: '' } as Hero;
+    if (paramId === 'new') {
+      this.isEditing = false;
+    } else {
+      this.isEditing = true;
+      const id = Number(paramId);
+      this.heroService.getById(id).subscribe((hero) => (this.hero = hero));
+    }
     // this.hero$ = this.heroService.getHero(id);
   }
 
@@ -32,7 +40,19 @@ export class HeroDetailComponent {
     this.location.back();
   }
 
-  save() {
-    this.heroService.update(this.hero).subscribe();
+  // create(): void {
+  //   this.heroService.create(this.hero).subscribe(() => this.goBack());
+  // }
+  //
+  // update(): void {
+  //   this.heroService.update(this.hero).subscribe(() => this.goBack());
+  // }
+
+  save(): void {
+    if (!this.isEditing) {
+      this.heroService.create(this.hero).subscribe(() => this.goBack());
+    } else {
+      this.heroService.update(this.hero).subscribe(() => this.goBack());
+    }
   }
 }

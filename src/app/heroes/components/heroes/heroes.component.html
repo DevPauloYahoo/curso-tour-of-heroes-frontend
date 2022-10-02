@@ -1,4 +1,13 @@
 <h2>My Heroes</h2>
+<button
+  [routerLink]="['new']"
+  class="add-button"
+  color="primary"
+  mat-mini-fab
+  matTooltip="Add Hero"
+>
+  <mat-icon>add</mat-icon>
+</button>
 
 <mat-table [dataSource]="heroes$" class="mat-elevation-z8">
   <!-- ID -->
