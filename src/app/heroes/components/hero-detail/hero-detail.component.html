@@ -1,19 +1,30 @@
 <h1>{{ isEditing ? 'Update' : 'Create' }} Hero</h1>
-<mat-card>
-  <mat-card-content fxLayout="column">
-    <mat-form-field *ngIf="isEditing">
-      <mat-label>ID</mat-label>
-      <input [value]="hero.id" disabled matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Hero Name</mat-label>
-      <input [(ngModel)]="hero.name" id="name" matInput placeholder="Hero Name" type="text" />
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions>
-    <button (click)="save()" color="primary" mat-raised-button>
-      {{ isEditing ? 'Update' : 'Create' }}
-    </button>
-    <button (click)="goBack()" mat-raised-button>Go Back</button>
-  </mat-card-actions>
-</mat-card>
+<form [formGroup]="formDetail" novalidate>
+  <mat-card>
+    <mat-card-content fxLayout="column">
+      <!-- ID -->
+      <mat-form-field *ngIf="isEditing">
+        <mat-label>ID</mat-label>
+        <input formControlName="id" matInput />
+      </mat-form-field>
+      <!-- Name -->
+      <mat-form-field>
+        <mat-label>Hero Name</mat-label>
+        <input formControlName="name" id="name" matInput placeholder="Hero Name" type="text" />
+        <!-- Validation -->
+        <mat-error *ngIf="formDetail.controls['name'].hasError('required')">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="formDetail.controls['name'].hasError('minlength')">
+          Name shoud contain at least 5 characters
+        </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="save()" [disabled]="formDetail.invalid" color="primary" mat-raised-button>
+        {{ isEditing ? 'Update' : 'Create' }}
+      </button>
+      <button (click)="goBack()" mat-raised-button>Go Back</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
