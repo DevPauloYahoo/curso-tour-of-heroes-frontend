@@ -23,9 +23,9 @@ export class HeroService {
   }
 
   // GET heroes/id
-  getById(_id: number): Observable<Hero> {
+  getById(id: number): Observable<Hero> {
     return this.http
-      .get<Hero>(`${this.baseUrl}/heroes/${_id}`)
+      .get<Hero>(this.getUrl(id))
       .pipe(
         tap((hero) => this.log(`HeroService: Fetched hero ID: ${hero.id} and Name: ${hero.name}`)),
       );
@@ -35,6 +35,7 @@ export class HeroService {
     // return of(hero);
   }
 
+  // POST heroes
   create(hero: Hero): Observable<Hero> {
     return this.http
       .post<Hero>(`${this.baseUrl}/heroes`, hero)
@@ -43,15 +44,28 @@ export class HeroService {
       );
   }
 
+  // PUT heroes/id
   update(hero: Hero): Observable<Hero> {
     return this.http
-      .put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero)
+      .put<Hero>(this.getUrl(hero.id), hero)
       .pipe(
         tap((hero) => this.log(`HeroService: Updated hero ID: ${hero.id} and Name: ${hero.name}`)),
       );
   }
 
+  // DELETE heroes/id
+  delete(hero: Hero): Observable<any> {
+    return this.http
+      .delete<any>(this.getUrl(hero.id))
+      .pipe(tap(() => this.log(`HeroService: deleted hero ID: ${hero.id} and Name: ${hero.name}`)));
+  }
+
+  // Private methods
   private log(message: string): void {
     this.messageService.add(message);
+  }
+
+  private getUrl(id: number): string {
+    return `${this.baseUrl}/heroes/${id}`;
   }
 }

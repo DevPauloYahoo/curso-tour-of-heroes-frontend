@@ -5,11 +5,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '../material/material.module';
+import { ConfirmationDialogComponent } from './components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { MessageComponent } from './components/message/message.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
-const COMPONENTS = [ToolbarComponent, MessageComponent];
+const COMPONENTS = [ToolbarComponent, MessageComponent, ConfirmationDialogComponent];
 const MODULES = [CommonModule, MaterialModule, FlexLayoutModule, RouterModule, HttpClientModule];
 
 @NgModule({
