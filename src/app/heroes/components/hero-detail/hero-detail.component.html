@@ -12,9 +12,7 @@
         <mat-label>Hero Name</mat-label>
         <input formControlName="name" id="name" matInput placeholder="Hero Name" type="text" />
         <!-- Validation -->
-        <mat-error *ngIf="formDetail.controls['name'].hasError('required')">
-          Name is required
-        </mat-error>
+        <mat-error *ngIf="name.hasError('required')"> Name is required</mat-error>
         <mat-error *ngIf="formDetail.controls['name'].hasError('minlength')">
           Name shoud contain at least 5 characters
         </mat-error>

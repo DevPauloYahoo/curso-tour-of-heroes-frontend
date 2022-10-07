@@ -14,7 +14,10 @@ import { HeroService } from '../../services/hero.service';
 export class HeroDetailComponent {
   // hero$!: Observable<Hero>;
   hero!: Hero;
+  paramId: string = '';
   isEditing = false;
+
+  // CREATE REACTIVE FORM
   formDetail = this.formBuilder.group({
     id: [{ value: '', disabled: true }],
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -29,21 +32,37 @@ export class HeroDetailComponent {
     this.getHero();
   }
 
+  get name() {
+    return this.formDetail.controls['name'];
+  }
+
   getHero(): void {
-    const paramId = this.route.snapshot.params['id'];
-    if (paramId !== 'new') {
-      // this.hero = { name: '' } as Hero;
+    this.paramId = this.route.snapshot.params['id'];
+    if (this.paramId !== 'new') {
       this.isEditing = true;
-      const id = Number(paramId);
-      this.heroService.getById(id).subscribe((hero) => {
-        this.hero = hero;
-        this.formDetail.setValue({
-          id: String(hero.id),
-          name: hero.name,
+      this.heroService.getById(+this.paramId).subscribe(({ id, name }) => {
+        this.formDetail.patchValue({
+          name,
+          id: id.toString(),
         });
-        // this.formDetail.controls.id.setValue(String(hero.id));
-        // this.formDetail.controls.name.setValue(String(hero.name));
       });
+      // const id = parseInt(paramId);
+      // this.heroService.getById(id).subscribe((hero) => {
+      // MANEIRA 1
+      // this.hero = hero;
+      // this.formDetail.patchValue({
+      //   hero.name,
+      //   id: hero.id.toString(),
+      // });
+      // MANEIRA 2
+      // this.formDetail.setValue({
+      //   id: String(hero.id),
+      //   name: hero.name,
+      // });
+      // MANEIRA 3
+      // this.formDetail.controls.id.setValue(String(hero.id));
+      // this.formDetail.controls.name.setValue(String(hero.name));
+      // });
     }
     // this.hero$ = this.heroService.getHero(id);
   }
@@ -65,25 +84,26 @@ export class HeroDetailComponent {
     if (this.formDetail.valid) {
       if (!this.isEditing) {
         // const hero: Hero = {
-        //   name: value.name!,
+        // name: value.name!,
         // } as Hero;
-
+        //
         this.heroService.create(this.setHero(value.name!)).subscribe(() => this.goBack());
       } else {
         // const hero: Hero = {
-        //   id: this.hero.id,
-        //   name: value.name!,
-        // };
+        // id: this.hero.id,
+        // name: value.name!,
+        //};
+        //
         this.heroService
-          .update(this.setHero(value.name!, this.hero.id))
+          .update(this.setHero(value.name!, +this.paramId))
           .subscribe(() => this.goBack());
       }
     }
   }
 
-  private setHero(name: string, id?: number): Hero {
+  private setHero(name: string, _id?: number): Hero {
     return {
-      id: id as number,
+      id: _id!,
       name,
     };
   }

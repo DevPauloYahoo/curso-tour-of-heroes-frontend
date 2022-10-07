@@ -49,4 +49,9 @@ export class HeroesComponent {
       }
     });
   }
+
+  onSelected(hero: Hero) {
+    this.delete(hero);
+    // this.route.navigate(['/heroes', hero.id]);
+  }
 }
